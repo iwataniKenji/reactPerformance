@@ -7,9 +7,13 @@ interface SearchResultsProps {
     price: number;
     title: string;
   }>;
+  onAddToWishList: (id: number) => void;
 }
 
-export function SearchResults({ results }: SearchResultsProps) {
+export function SearchResults({
+  results,
+  onAddToWishList,
+}: SearchResultsProps) {
   // 1 - função -> calculo que será memorizado
   // 2 - array de dependências -> quando calculo será refeito
   const totalPrice = useMemo(() => {
@@ -22,10 +26,14 @@ export function SearchResults({ results }: SearchResultsProps) {
     <div>
       <h2>{totalPrice}</h2>
 
-      <Component totalPrice={totalPrice} />
-
       {results.map((product) => {
-        return <ProductItem product={product} />;
+        return (
+          <ProductItem
+            key={product.id}
+            product={product}
+            onAddToWishList={onAddToWishList}
+          />
+        );
       })}
     </div>
   );
