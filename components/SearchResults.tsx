@@ -11,7 +11,7 @@ interface SearchResultsProps {
   onAddToWishList: (id: number) => void;
 }
 
-export function SearchResults({
+export default function SearchResults({
   totalPrice,
   results,
   onAddToWishList,

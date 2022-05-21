@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useState } from "react";
-import { SearchResults } from "../components/SearchResults";
+import SearchResults from "../components/SearchResults";
 
 type Results = {
   totalPrice: number;
@@ -23,19 +23,19 @@ export default function App() {
     const response = await fetch(`http://localhost:4444/products?q=${search}`);
     const data = await response.json();
 
-    const formatter = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
+    const formatter = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
       currency: "BRL",
-    })
+    });
 
-    const products = data.map(product => {
+    const products = data.map((product) => {
       return {
         id: product.id,
         title: product.title,
         price: product.price,
         priceFormatted: formatter.format(product.price),
-      }
-    })
+      };
+    });
 
     const totalPrice = data.reduce((total, product) => {
       return total + product.price;
@@ -62,8 +62,11 @@ export default function App() {
         <button type="submit">Buscar</button>
       </form>
 
-      <SearchResults results={results.data}
-      totalPrice={results.totalPrice} onAddToWishList={addToWishList} />
+      <SearchResults
+        results={results.data}
+        totalPrice={results.totalPrice}
+        onAddToWishList={addToWishList}
+      />
     </div>
   );
 }
