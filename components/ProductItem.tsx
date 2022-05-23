@@ -1,4 +1,5 @@
 import { memo, useState, lazy, Suspense } from "react";
+import lodash from "lodash";
 
 const AddProductToWishlist = lazy(() => {
   return import("./AddProductToWishlist");
@@ -41,6 +42,7 @@ export const ProductItem = memo(
   ProductItemComponent,
   (prevProps, nextProps) => {
     // evita renderização desnecessária caso a condição abaixo não seja satisfeita
-    return Object.is(prevProps.product, nextProps.product);
+    // lodash.isEqual -> verifica se duas informações são iguais
+    return lodash.isEqual(prevProps.product, nextProps.product);
   }
 );
